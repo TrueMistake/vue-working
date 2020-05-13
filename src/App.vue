@@ -8,8 +8,11 @@
         <router-link tag="li" :to="{name:'form'}" class="nav-li" active-class="active">
           <a class="nav-link">Form</a>
         </router-link>
-        <router-link tag="li" :to="{name:'cards'}" class="nav-li" active-class="active">
+        <router-link tag="li" :to="{name:'products'}" class="nav-li" active-class="active">
           <a class="nav-link">Card</a>
+        </router-link>
+        <router-link tag="li" :to="{name:'calculator'}" class="nav-li" active-class="active">
+          <a class="nav-link">Calculator</a>
         </router-link>
       </ul>
     </nav>
@@ -37,6 +40,7 @@ export default {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Arial';
   }
   .container{
     width: 1170px;

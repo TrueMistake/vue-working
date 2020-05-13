@@ -1,10 +1,11 @@
 import VueRouter from 'vue-router'
-import Form from './pages/form'
+import Form from './pages/Form/form'
 import Home from './pages/home'
-import Card from './pages/card'
-import cardDetail from './pages/cardDetail'
-import ErrorCmp from './pages/Error'
-import basketPage from "./pages/basketPage";
+import Product from './pages/Product/products'
+import productDetail from './pages/Product/productDetail'
+import ErrorCmp from './pages/Error/Error'
+import basketPage from "./pages/Basket/basketPage";
+import calculator from "./pages/calculator";
 
 export default new VueRouter({
     routes: [
@@ -19,22 +20,28 @@ export default new VueRouter({
             component:Form
         },
         {
-            path: '/cards',
-            name: 'cards',
-            component:Card,
+            path: '/products',
+            name: 'products',
+            component:Product,
             props:true
         },
         {
-            path: '/card/:id',
-            name: 'card',
-            component:cardDetail,
-            props: (route) => route.params.item
+            path: '/product/:id',
+            name: 'product',
+            props:true,
+            component:productDetail
         },
         {
             path: '/basket',
             name: 'basket',
             component:basketPage,
-            props: (route) => route.params.item
+            props:true
+        },
+        {
+            path: '/calculator',
+            name: 'calculator',
+            component:calculator,
+            props:true
         },
         {
             path: '*',
