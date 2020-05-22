@@ -8,7 +8,7 @@
                     <div class="basketPage-item__name">{{item.name}}</div>
                     <div class="basketPage-item__num">
                         <div @click="addBascket(item)" class="basketPage-item__num-plus">+</div>
-                        <input type="number" @change="changeCount" :value="item.buy">
+                        <input type="number" @change="changeCount(item.id)" :value="item.buy">
                         <div @click="remoteBasket(item)" class="basketPage-item__num-minus">-</div>
                     </div>
                     <div class="basketPage-item__price">{{item.price}} ₽.</div>
@@ -24,7 +24,7 @@
     </div>
     <div class="empty" v-else>
         <h1>Корзина пуста</h1>
-        <router-link class="" to="/cards">Back</router-link>
+        <router-link class="" to="/products">Back</router-link>
     </div>
 </template>
 
@@ -48,51 +48,13 @@
             remoteBasket(item) {
                 this.$store.dispatch('remoteBasket', item.id)
             },
-            changeCount(event) {
-                // console.log('event', event.target.value);
-            }
-            /*payment(item, payment) {
-                for (let i = 0; i, this.arrToBuy.length; i++) {
-                    if (this.arrToBuy[i].id === item.id) {
-                        if (payment === 'plus') {
-                            this.arrToBuy[i].buy += 1;
-                            this.count += 1;
-                            this.total += +this.arrToBuy[i].price
-                        }
-                        if (payment === 'minus') {
-                            this.arrToBuy[i].buy -= 1;
-                            this.count -= 1;
-                            this.total -= +this.arrToBuy[i].price
-                        }
-                    }
-                }
+            changeCount(id) {
+                this.$store.dispatch('changeCount',{id:id, count:event.target.value})
             },
-            localStor() {
-                localStorage.setItem('myProduct', JSON.stringify(this.store))
-            },
-            clearBasket() {
-
-                /!** Todo
-                 * поправить очистку корзины
-                 * **!/
-                this.arrToBuy = [];
-                localStorage.clear();
+            /*clearBasket() {
+                this.$store.dispatch('clearBasket');
             }*/
-        },
-        /*watch: {
-            arrToBuy() {
-                this.store = {'card': this.arrToBuy};
-                this.localStor();
-            },
-            count() {
-                this.store['count'] = this.count;
-                this.localStor();
-            },
-            total() {
-                this.store['total'] = this.total;
-                this.localStor();
-            }
-        }*/
+        }
     }
 </script>
 

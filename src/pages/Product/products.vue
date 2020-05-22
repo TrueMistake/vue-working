@@ -58,57 +58,13 @@
                 return this.$store.getters.arrToBuy
             }
         },
-        /*mounted(){
-            if (localStorage.getItem('myProduct')) {
-                this.totalCount = JSON.parse(localStorage.getItem('myProduct')).count;
-                this.totalPrice = JSON.parse(localStorage.getItem('myProduct')).total;
-                this.store.card = JSON.parse(localStorage.getItem('myProduct')).card;
-                this.arrToBuy = JSON.parse(localStorage.getItem('myProduct')).card;
-            }
-        },*/
         methods: {
             discharge(price) {
                 return price.toLocaleString()
             },
             addBascket(item){
                 this.$store.dispatch('addBascket',item.id)
-                /*let item = this.prod.filter((el) => {
-                        if (el.id == id) {
-                            el.buy = 1;
-                            return el;
-                        }
-                    });
-                this.totalCount++;
-                this.totalPrice += Number(item[0].price);
-                this.addLocalStorage(item[0],this.totalCount,this.totalPrice);
-                this.localStor();*/
-            },
-
-            /*addLocalStorage(item, count, price) {
-                let mass = this.store.card.filter(el => el.id === item.id);
-                if (this.store.card.length && mass.length) {
-                    for (let i = 0; i < this.store.card.length; i++) {
-                        if (this.store.card[i].id === item.id ){
-                            this.store.card[i].buy += 1;
-                        }
-                    }
-                } else {
-                    this.store.card.push({
-                        id: item.id,
-                        img: item.img,
-                        name: item.name,
-                        price: item.price,
-                        buy: 1
-                    });
-                }
-                this.arrToBuy = this.store.card;
-
-                this.store['count'] = count;
-                this.store['total'] = price;
-            },
-            localStor() {
-                localStorage.setItem('myProduct', JSON.stringify(this.store))
-            },*/
+            }
         },
         components:{
             appDetail:Detail,

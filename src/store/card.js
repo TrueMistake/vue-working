@@ -94,6 +94,27 @@ export default {
         },
         addLocalStorage(state) {
             localStorage.setItem('myProduct', JSON.stringify(state.store))
+        },
+        clearBasket(state) {
+            state.arrToBuy = [];
+        },
+        changeCount(state, payload) {
+            const {id, count} = payload;
+            state.arrToBuy.filter(item => {
+                if (item.id === id) {
+                    item.buy = count;
+                }
+            });
+        },
+        recalculation(state) {
+            state.totalCount = 0;
+            state.totalPrice = 0;
+            state.arrToBuy.map(el => {
+                state.totalCount += +el.buy;
+                state.totalPrice += +el.buy * el.price;
+            });
+            state.store['count'] = state.totalCount;
+            state.store['total'] = state.totalPrice;
         }
     },
     actions: {
@@ -116,7 +137,16 @@ export default {
             state.commit('totalCount', -1);
             state.commit('totalPrice', -item.price);
             state.commit('removeStore', payload);
-            state.commit('addLocalStorage', item)
+            state.commit('addLocalStorage', item);
+        },
+        clearBasket(state) {
+            state.commit('clearBasket');
+            localStorage.clear();
+        },
+        changeCount(state, payload) {
+            state.commit('changeCount', payload);
+            state.commit('recalculation');
+            state.commit('addLocalStorage');
         }
     },
     getters: {
