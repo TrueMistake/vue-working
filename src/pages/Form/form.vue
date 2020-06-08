@@ -118,11 +118,11 @@
                 }
             },
             sendForm() {
-                axios.post('./vue//user.php', this.success)
-                    .then((response) => {
-                        console.log('response',response);
+                axios.post('http://localhost:8080/user.php', this.success)
+                    .then(response => {
+                        console.log('response',response.data);
                     })
-                    .catch((error) => {
+                    .catch(error => {
                         console.log('error', error);
                     })
             }

@@ -15,9 +15,9 @@
                        @blur="blurInput"
                        @change="changeInput"
                        min="0"
-                       :max="service.price"
+                       :max="newVal[key]"
                        :disabled="!serviceCheck[key]"
-                       :value="discharge(service.price)"> ₽
+                       v-model="newVal[key]"> ₽
             </div>
         </div>
         <div class="service-total">Сумма к оплате: {{discharge(totalPrice)}} ₽</div>
@@ -30,13 +30,19 @@
         data() {
             return {
                 totalPrice: 0,
-                serviceCheck: []
+                serviceCheck: [],
+                newVal: {}
             }
         },
         computed: {
             services() {
                 return this.$store.getters.services
-            },
+            }
+        },
+        beforeMount() {
+            Object.keys(this.services).forEach(el => {
+                this.newVal[el] = this.services[el].price
+            });
         },
         methods: {
             discharge(price) {
@@ -64,8 +70,6 @@
                 setTimeout(() => {
                     const input = document.querySelectorAll('.service-item.checked .service-pay');
                     Array.from(input).forEach(el => {
-                        console.log('el.value',el.value);
-                        el.setAttribute('value', el.value);
                         let conversion = el.value.replace(' ','');
                         this.totalPrice += +conversion;
                     },1)
@@ -75,16 +79,6 @@
         watch: {
             serviceCheck() {
                 this.eachInput();
-
-                /*this.totalPrice = 0;
-                for (let i = 0; i < this.services.length; i++) {
-                    Object.keys(this.serviceCheck).forEach(key => {
-                        if (this.services[i].id === key) {
-
-                        }
-                        console.log('key',key);
-                    })
-                }*/
             }
         }
     }

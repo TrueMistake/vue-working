@@ -3,11 +3,11 @@
         <h1>Корзина</h1>
         <div class="basketPage">
             <div class="basketPage-list">
-                <div class="basketPage-item" v-for="item in arrToBuy" :key="item.id + Math.random()">
+                <div class="basketPage-item" v-for="(item, key) in arrToBuy" :key="key">
                     <img :src="item.img" alt="" class="basketPage-item__img">
                     <div class="basketPage-item__name">{{item.name}}</div>
                     <div class="basketPage-item__num">
-                        <div @click="addBascket(item)" class="basketPage-item__num-plus">+</div>
+                        <div @click="addBasket(item)" class="basketPage-item__num-plus">+</div>
                         <input type="number" @change="changeCount(item.id)" :value="item.buy">
                         <div @click="remoteBasket(item)" class="basketPage-item__num-minus">-</div>
                     </div>
@@ -42,8 +42,8 @@
             }
         },
         methods: {
-            addBascket(item) {
-                this.$store.dispatch('addBascket', item.id)
+            addBasket(item) {
+                this.$store.dispatch('addBasket', item.id)
             },
             remoteBasket(item) {
                 this.$store.dispatch('remoteBasket', item.id)

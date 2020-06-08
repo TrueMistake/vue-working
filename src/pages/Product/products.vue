@@ -25,7 +25,7 @@
                 >{{item.name}}</router-link>
                 <div class="card-item__bottom">
                     <div class="card-item__price">{{discharge(item.price)}} ₽</div>
-                    <div class="card-item__buy" @click="addBascket(item)">
+                    <div class="card-item__buy" @click="addBasket(item, 1)">
                         <template v-for="counter in arrToBuy">
                             <span v-if="counter.id === item.id">{{counter.buy}}</span>
                         </template>
@@ -62,8 +62,8 @@
             discharge(price) {
                 return price.toLocaleString()
             },
-            addBascket(item){
-                this.$store.dispatch('addBascket',item.id)
+            addBasket(item, count){
+                this.$store.dispatch('addBasket',{id: item.id, count: count})
             }
         },
         components:{

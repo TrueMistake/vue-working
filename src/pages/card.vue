@@ -28,7 +28,7 @@
                 >{{item.name}}</router-link>
                 <div class="card-item__bottom">
                     <div class="card-item__price">{{discharge(item.price)}}р</div>
-                    <div class="card-item__buy" @click="addBascket(item.id)">
+                    <div class="card-item__buy" @click="addBasket(item.id)">
                         <template v-for="counter in arrToBuy">
                             <span v-if="counter.id === item.id">{{counter.buy}}</span>
                         </template>
@@ -100,7 +100,7 @@
             }
         },
         methods: {
-            addBascket(id){
+            addBasket(id){
                 let item = this.prod.filter((el) => {
                         if (el.id == id) {
                             el.buy = 1;

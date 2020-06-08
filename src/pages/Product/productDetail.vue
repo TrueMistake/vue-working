@@ -7,7 +7,7 @@
             <div class="detail-right">
                 <div class="detail-right__name">{{product.name}}</div>
                 <div class="detail-right__price">{{discharge(product.price)}} ₽</div>
-                <div class="detail-right__buy" @click="addBascket(product)"><span>{{productById(product.id).buy}}</span></div>
+                <div class="detail-right__buy" @click="addBasket(product, 1)"><span>{{productById(product.id).buy}}</span></div>
             </div>
         </div>
     </div>
@@ -32,8 +32,8 @@
             discharge(price) {
                 return price.toLocaleString()
             },
-            addBascket(item) {
-                this.$store.dispatch('addBascket', item.id)
+            addBasket(item, count) {
+                this.$store.dispatch('addBasket', {id: item.id, count: count})
             }
         }
         /*mounted() {
