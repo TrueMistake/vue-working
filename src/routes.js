@@ -5,7 +5,8 @@ import Product from './pages/Product/products'
 import productDetail from './pages/Product/productDetail'
 import ErrorCmp from './pages/Error/Error'
 import basketPage from "./pages/Basket/basketPage";
-import calculator from "./pages/calculator";
+import calculator from "./pages/Calculator/calculator";
+import todo from "./pages/Todo/todo";
 
 export default new VueRouter({
     routes: [
@@ -41,6 +42,12 @@ export default new VueRouter({
             path: '/calculator',
             name: 'calculator',
             component:calculator,
+            props:true
+        },
+        {
+            path: '/todo',
+            name: 'todo',
+            component:todo,
             props:true
         },
         {

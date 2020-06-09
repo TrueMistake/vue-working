@@ -45,7 +45,6 @@ export default {
     },
     mutations: {
         totalCount(state, payload) {
-            console.log('totalCount', payload);
             state.totalCount += payload;
             state.store['count'] = state.totalCount;
         },
@@ -121,8 +120,6 @@ export default {
     actions: {
         addBasket(state, payload) {
             const item = state.state.products.find(item => item.id === payload.id);
-            console.log('payload add', payload.count);
-            console.log('payload type add',typeof payload.count);
             state.commit('totalCount', payload.count);
             state.commit('totalPrice', item.price);
             state.commit('addStore', {
@@ -136,9 +133,6 @@ export default {
         },
         remoteBasket(state, payload) {
             const item = state.state.products.find(item => item.id === payload.id);
-            console.log('payload remove', payload);
-            console.log('payload count', payload.count);
-            console.log('payload type remove',typeof payload.count);
             state.commit('remoteBasket', payload.id);
             state.commit('totalCount', -payload.count);
             state.commit('totalPrice', -item.price);

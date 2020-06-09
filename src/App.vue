@@ -14,6 +14,9 @@
         <router-link tag="li" :to="{name:'calculator'}" class="nav-li" active-class="active">
           <a class="nav-link">Calculator</a>
         </router-link>
+        <router-link tag="li" :to="{name:'todo'}" class="nav-li" active-class="active">
+          <a class="nav-link">Todo</a>
+        </router-link>
       </ul>
     </nav>
 
@@ -33,7 +36,7 @@ export default {
 </script>
 
 <style>
-    *,*:before,*:after:{
+    *,*:before,*:after{
         box-sizing: border-box;
     }
   body{
