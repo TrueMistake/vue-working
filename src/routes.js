@@ -7,6 +7,9 @@ import ErrorCmp from './pages/Error/Error'
 import basketPage from "./pages/Basket/basketPage";
 import calculator from "./pages/Calculator/calculator";
 import todo from "./pages/Todo/todo";
+import unsplash from "./pages/unsplash/unsplash";
+import unsplashDetail from './pages/unsplash/unsplashDetail'
+import chess from "./pages/chess/chess";
 
 export default new VueRouter({
     routes: [
@@ -14,6 +17,11 @@ export default new VueRouter({
             path: '/',
             name:'home',
             component:Home
+        },
+        {
+            path: '/chess',
+            name:'chess',
+            component:chess
         },
         {
             path: '/form',
@@ -48,6 +56,18 @@ export default new VueRouter({
             path: '/todo',
             name: 'todo',
             component:todo,
+            props:true
+        },
+        {
+            path: '/unsplash',
+            name: 'unsplash',
+            component:unsplash,
+            props:true
+        },
+        {
+            path: '/unsplash/:id',
+            name: 'unsplash',
+            component: unsplashDetail,
             props:true
         },
         {

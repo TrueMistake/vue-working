@@ -17,6 +17,12 @@
         <router-link tag="li" :to="{name:'todo'}" class="nav-li" active-class="active">
           <a class="nav-link">Todo</a>
         </router-link>
+        <router-link tag="li" :to="{name:'chess'}" class="nav-li" active-class="active">
+          <a class="nav-link">Chess</a>
+        </router-link>
+        <router-link tag="li" :to="{name:'unsplash'}" class="nav-li" active-class="active">
+          <a class="nav-link">Unsplash</a>
+        </router-link>
       </ul>
     </nav>
 

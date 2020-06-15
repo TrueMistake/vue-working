@@ -36,31 +36,6 @@
                 this.$store.dispatch('addBasket', {id: item.id, count: count})
             }
         }
-        /*mounted() {
-            if (localStorage.getItem('myProduct')) {
-                this.arrToBuy = JSON.parse(localStorage.getItem('myProduct'));
-                this.arrToBuy.card.filter(el => {
-                    if (this.id === el.id) {
-                        return this.product = el;
-                    }
-                })
-            }
-        },
-        methods: {
-            buyProduct(id) {
-                for (let i = 0; i, this.arrToBuy.card.length; i++) {
-                    if (this.arrToBuy.card[i].id === id) {
-                        this.arrToBuy.card[i].buy += 1;
-                        this.arrToBuy.count += 1;
-                        this.arrToBuy.total = +this.arrToBuy.total + +this.price;
-                        this.localStor();
-                    }
-                }
-            },
-            localStor() {
-                localStorage.setItem('myProduct', JSON.stringify(this.arrToBuy))
-            }
-        }*/
     }
 </script>
 
