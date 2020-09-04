@@ -45,11 +45,11 @@ export default {
     },
     mutations: {
         totalCount(state, payload) {
-            state.totalCount += payload;
+            state.totalCount += +payload;
             state.store['count'] = state.totalCount;
         },
         totalPrice(state, payload) {
-            state.totalPrice += payload;
+            state.totalPrice += +payload;
             state.store['total'] = state.totalPrice;
         },
         addStore(state, payload) {
@@ -88,6 +88,9 @@ export default {
                 for (let i = 0; i < state.arrToBuy.length; i++) {
                     if (state.arrToBuy[i].id === payload ){
                         state.arrToBuy[i].buy -= 1;
+                        if (state.arrToBuy[i].buy === 0) {
+                          state.arrToBuy.splice(i, 1);
+                        }
                     }
                 }
             }
@@ -97,6 +100,9 @@ export default {
         },
         clearBasket(state) {
             state.arrToBuy = [];
+            state.totalCount = 0;
+            state.totalPrice = 0;
+            state.store = {'card':[]}
         },
         changeCount(state, payload) {
             const {id, count} = payload;
@@ -119,14 +125,16 @@ export default {
     },
     actions: {
         addBasket(state, payload) {
-            const item = state.state.products.find(item => item.id === payload.id);
+            const item = state.state.products.find(el => el.id === payload.id);
+            console.log('item',item);
+            console.log('payload',payload);
             state.commit('totalCount', payload.count);
             state.commit('totalPrice', item.price);
             state.commit('addStore', {
                 id: item.id,
                 img: item.img,
                 name: item.name,
-                price: item.price,
+                price: +item.price,
                 buy: 1
             });
             state.commit('addLocalStorage', item)

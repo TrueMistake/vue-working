@@ -14,6 +14,7 @@ const unsplash = new Unsplash({
 export default {
     state: {
         photos: [],
+        detailPhoto:null,
         access_token: null
     },
     mutations: {
@@ -22,26 +23,33 @@ export default {
             console.log('payload',payload);
         },
         photos(state, payload) {
-            state.photos = payload;
+          payload.map(item => {
+            state.photos.push(item);
+          })
+        },
+        detailPhoto(state, payload) {
+          state.photos.map(item => {
+            if (item.id === payload) {
+              state.detailPhoto = item;
+            }
+          });
         }
     },
     actions: {
         like(state, payload) {
-            console.log('payload',payload);
             try {
                 unsplash.photos.likePhoto(payload)
                     .then(toJson)
                     .then(json => {
-                        console.log('json',json);
                         state.commit('like', json);
                     });
             } catch (e) {
                 console.log(e.message);
             }
         },
-        photos({commit}) {
+        photos({commit}, payload) {
             try{
-                unsplash.photos.listPhotos(2, 10, "latest")
+                unsplash.photos.listPhotos(payload, 10, "latest")
                     .then(toJson)
                     .then(json => {
                         commit('photos',json);
@@ -51,27 +59,29 @@ export default {
             }
         },
         auth() {
-            console.log('auth');
             try {
                 unsplash.auth.userAuthentication(query.code)
                     .then(toJson)
                     .then(json => {
-                        console.log('json',json);
                         unsplash.auth.setBearerToken(json.access_token);
                     });
             }catch (e) {
                 console.log(e.message);
             }
+        },
+        detailPhoto(state, payload) {
+          state.commit('detailPhoto', payload);
         }
     },
     getters: {
         photos(state) {
           return state.photos;
         },
-        detailAuthor(state){
-            return user => {
-                return state.photos.find(product => product.user.username === user)
-            }
+        detailPhoto(state) {
+          // return state.detailPhoto;
+          return user => {
+            return state.photos.find(product => product.user.username === user)
+          }
         }
     }
 }

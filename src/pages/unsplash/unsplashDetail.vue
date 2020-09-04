@@ -1,11 +1,11 @@
 <template>
     <div class="unsplash-detail">
         <h1>Детальняа страница Автора</h1>
-        <img :src="detailAuthor.urls.full" alt="" class="unsplash-detail__full">
-        <div class="unsplash-detail__author">Author: {{detailAuthor.user.username}}</div>
-        <div class="unsplash-detail__date">Date: {{detailAuthor.created_at}}</div>
-        <div class="unsplash-detail__likes">likes: {{detailAuthor.likes}}</div>
-        <button class="unsplash-detail__btn-like" @click="like(detailAuthor.id)">CLICK</button>
+        <img :src="detailPhoto.urls.full" alt="" class="unsplash-detail__full">
+        <div class="unsplash-detail__author">Author: {{detailPhoto.user.username}}</div>
+        <div class="unsplash-detail__date">Date: {{detailPhoto.created_at}}</div>
+        <div class="unsplash-detail__likes">likes: {{detailPhoto.likes}}</div>
+        <button class="unsplash-detail__btn-like" @click="like(detailPhoto.id)">CLICK</button>
         <router-link
                 tag="a"
                 to="/unsplash"
@@ -17,9 +17,10 @@
     export default {
         props:['id'],
         computed: {
-            detailAuthor() {
+            detailPhoto() {
                 const id = this.id;
-                return this.$store.getters.detailAuthor(id)
+                return this.$store.getters.detailPhoto(id);
+                // return this.$store.getters.detailPhoto;
             }
         },
         mounted() {

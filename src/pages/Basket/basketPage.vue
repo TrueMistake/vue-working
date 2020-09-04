@@ -7,7 +7,7 @@
                     <img :src="item.img" alt="" class="basketPage-item__img">
                     <div class="basketPage-item__name">{{item.name}}</div>
                     <div class="basketPage-item__num">
-                        <div @click="addBasket(item)" class="basketPage-item__num-plus">+</div>
+                        <div @click="addBasket(item, 1)" class="basketPage-item__num-plus">+</div>
                         <input type="number" @change="changeCount(item.id)" :value="item.buy">
                         <div @click="remoteBasket(item)" class="basketPage-item__num-minus">-</div>
                     </div>
@@ -19,8 +19,10 @@
                 <div class="basketPage-total">Итого: <span>{{totalPrice}} ₽.</span></div>
             </div>
         </div>
-<!--        <button class="basketPage-clear" @click="clearBasket">Очистить корзину</button>-->
-        <router-link class="" to="/cards">Back</router-link>
+        <button class="basketPage-clear" @click="clearBasket">Очистить корзину</button>
+        <div class="basketPage-back">
+          <router-link class="basketPage-back__link" to="/products">Back</router-link>
+        </div>
     </div>
     <div class="empty" v-else>
         <h1>Корзина пуста</h1>
@@ -31,6 +33,9 @@
 <script>
     export default {
         computed: {
+            localStor() {
+              return this.$store.getters.localStor
+            },
             arrToBuy() {
                 return this.$store.getters.arrToBuy
             },
@@ -43,17 +48,17 @@
         },
         methods: {
             addBasket(item) {
-                this.$store.dispatch('addBasket', item.id)
+                this.$store.dispatch('addBasket', {id: item.id, count: 1})
             },
             remoteBasket(item) {
-                this.$store.dispatch('remoteBasket', item.id)
+                this.$store.dispatch('remoteBasket', {id: item.id, count: 1})
             },
             changeCount(id) {
                 this.$store.dispatch('changeCount',{id:id, count:event.target.value})
             },
-            /*clearBasket() {
+            clearBasket() {
                 this.$store.dispatch('clearBasket');
-            }*/
+            }
         }
     }
 </script>
@@ -90,8 +95,13 @@
         align-items: center;
     }
     .basketPage-item__num input{
-        width: 30px;
+        width: 50px;
         padding: 5px 10px;
+    }
+    .basketPage-item__num input::-webkit-outer-spin-button,
+    .basketPage-item__num input::-webkit-inner-spin-button{
+      margin: 0;
+      -webkit-appearance: none;
     }
     .basketPage-item__num-plus{
         cursor: pointer;
@@ -146,6 +156,10 @@
         font-weight: bold;
         cursor: pointer;
         margin-top: 20px;
+    }
+    .basketPage-back{
+      display: block;
+      margin-top: 20px;
     }
 
     .empty{
